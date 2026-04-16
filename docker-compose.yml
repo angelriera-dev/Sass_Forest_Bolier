@@ -1,0 +1,12 @@
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: ./DockerFile
+    network_mode: host
+    user: "1000:1000"
+    
+    working_dir: /app
+    volumes:
+      - .:/app
