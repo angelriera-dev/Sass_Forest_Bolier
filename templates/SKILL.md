@@ -1,7 +1,7 @@
 ---
 name: project-templates
 description: >
-  Project-specific template conventions and patterns for dj-htmx.
+  Project-specific template conventions, components, and patterns for Django Fortress SaaS.
   Use when modifying any template in templates/ folder.
 license: MIT
 metadata:
@@ -29,7 +29,7 @@ Use this skill when:
 | DaisyUI | v5.x |
 | Django | 6.x |
 
-See `django-htmx` global skill for detailed patterns.
+See global `django-htmx` skill (loaded on-demand) for detailed HTMX+Alpine.js patterns.
 
 ---
 
