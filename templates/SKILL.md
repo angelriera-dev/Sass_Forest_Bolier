@@ -266,6 +266,6 @@ Parameters: `url`, `text`
 
 ## Reference
 
-- Consolidated frontend notes: `frontend.md`
+- Consolidated frontend notes: `docs/frontend.md`
 - Project overview: `AGENT.md`
 - Local custom skills: `/SKILLS`
