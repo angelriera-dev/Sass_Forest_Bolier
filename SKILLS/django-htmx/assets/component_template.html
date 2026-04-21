@@ -1,0 +1,29 @@
+{# django-htmx Component Template #}
+{# Usage: Copy this to templates/components/ and customize #}
+{% load django_htmx %}
+<div id="{{ id|default:"component-id" }}"
+     class="component-container"
+     hx-get="{{ hx_get|default:'' }}"
+     hx-trigger="{{ hx_trigger|default:'load' }}"
+     hx-target="#{{ target|default:'content' }}"
+     hx-swap="{{ hx_swap|default:'innerHTML' }}">
+
+    {# Loading state #}
+    <span class="htmx-indicator">Loading...</span>
+
+    {# Content area #}
+    <div class="content">
+        {% block component_content %}
+        {# Add your component content here #}
+        {% endblock %}
+    </div>
+</div>
+
+<style>
+.component-container.htmx-request .htmx-indicator {
+    display: inline;
+}
+.component-container .htmx-indicator {
+    display: none;
+}
+</style>
