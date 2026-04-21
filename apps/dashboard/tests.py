@@ -50,7 +50,8 @@ class AuthUiSmokeTests(TestCase):
         response = self.client.get(reverse('account_login'))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'Sign in')
-        self.assertContains(response, 'card bg-base-100')
+        self.assertContains(response, 'max-w-md')
+        self.assertContains(response, 'min-h-[calc(100vh-5rem)]')
 
     def test_logout_page_uses_modern_confirmation(self):
         user = User.objects.create_user(email='test@example.com', password='testpass123')

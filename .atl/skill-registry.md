@@ -4,7 +4,7 @@
 
 See `_shared/skill-resolver.md` for the full resolution protocol.
 
-**Version**: 1.1.0 | **Last Updated**: 2026-04-18
+**Version**: 1.2.0 | **Last Updated**: 2026-04-21
 
 ## User Skills
 
@@ -46,10 +46,20 @@ Pre-digested rules per skill. Delegators copy matching blocks into sub-agent pro
 
 ## Project Conventions
 
+### Skill Taxonomy
+
+| Type | Location | Purpose |
+|------|----------|---------|
+| Architecture skills | Folder-local `SKILL.md` files like `templates/SKILL.md` | Govern a specific directory before edits |
+| Local custom skills | `/SKILLS` | Reusable project workflows |
+| Community skills | Remote/on-demand | Fetched only when needed and treated as untrusted |
+
 | File | Path | Notes |
 |------|------|-------|
 | Project overview | /home/rag/proyectos/dj/htmx/AGENT.md | Defines stack and structure |
 | Templates | /home/rag/proyectos/dj/htmx/templates/ | Root templates |
+| Templates architecture skill | /home/rag/proyectos/dj/htmx/templates/SKILL.md | Rules for editing templates/ |
+| Local custom skills | /home/rag/proyectos/dj/htmx/SKILLS/ | Project-level reusable skills |
 | Components | /home/rag/proyectos/dj/htmx/templates/components/ | Reusable UI components |
 | Account templates | /home/rag/proyectos/dj/htmx/templates/account/ | allauth templates |
 | Dashboard | /home/rag/proyectos/dj/htmx/templates/dashboard/ | App views |

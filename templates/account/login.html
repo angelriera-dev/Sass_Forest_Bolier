@@ -1,44 +1,34 @@
-{% extends "base.html" %}
+{% extends "components/ui/auth_shell.html" %}
 
 {% block title %}Sign In | SaaS Boilerplate{% endblock %}
 
-{% block content %}
-<div class="flex min-h-[calc(100vh-5rem)] items-center justify-center px-4 py-10">
-  <div class="w-full max-w-md">
-    <div class="card bg-base-100 border border-base-200 shadow-sm">
-      <div class="card-body p-6 sm:p-8">
-        <div class="text-center">
-          <h2 class="text-3xl font-semibold tracking-tight">Sign in</h2>
-          <p class="mt-2 text-sm text-base-content/60">
-            Or {% include "components/ui/link.html" with url="account_signup" text="create an account" %}
-          </p>
-        </div>
+{% block auth_heading %}Sign in{% endblock %}
+{% block auth_subtitle %}
+Or {% include "components/ui/link.html" with url="account_signup" text="create an account" %}
+{% endblock %}
 
-        <form method="POST" action="{% url 'account_login' %}" class="space-y-5">
-          {% csrf_token %}
-          {% if redirect_field_value %}
-          <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-          {% endif %}
+{% block auth_content %}
+<form method="POST" action="{% url 'account_login' %}" class="space-y-5">
+  {% csrf_token %}
+  {% if redirect_field_value %}
+  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+  {% endif %}
 
-          {% include "components/ui/input.html" with id="id_login" name="login" type="email" label="Email" placeholder="you@example.com" required=True %}
-          {% include "components/ui/input.html" with id="id_password" name="password" type="password" label="Password" placeholder="••••••••" required=True no_margin=True %}
+  {% include "components/ui/input.html" with id="id_login" name="login" type="email" label="Email" placeholder="you@example.com" required=True %}
+  {% include "components/ui/input.html" with id="id_password" name="password" type="password" label="Password" placeholder="••••••••" required=True no_margin=True %}
 
-          <div class="flex items-center justify-between gap-4">
-            <label class="label cursor-pointer gap-2 p-0 justify-start">
-              <input id="id_remember" name="remember" type="checkbox" class="checkbox checkbox-sm">
-              <span class="label-text text-sm">Remember me</span>
-            </label>
-            <div class="text-sm">
-              {% include "components/ui/link.html" with url="account_reset_password" text="Forgot password?" %}
-            </div>
-          </div>
-
-          {% include "components/error_block.html" %}
-
-          {% include "components/ui/button.html" with text="Sign in" icon="fa-solid fa-lock" type="submit" class="w-full" %}
-        </form>
-      </div>
+  <div class="flex items-center justify-between gap-4">
+    <label class="label cursor-pointer gap-2 p-0 justify-start">
+      <input id="id_remember" name="remember" type="checkbox" class="checkbox checkbox-sm">
+      <span class="label-text text-sm">Remember me</span>
+    </label>
+    <div class="text-sm">
+      {% include "components/ui/link.html" with url="account_reset_password" text="Forgot password?" %}
     </div>
   </div>
-</div>
+
+  {% include "components/error_block.html" %}
+
+  {% include "components/ui/button.html" with text="Sign in" icon="fa-solid fa-lock" type="submit" class="w-full" %}
+</form>
 {% endblock %}

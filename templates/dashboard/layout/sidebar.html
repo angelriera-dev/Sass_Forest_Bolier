@@ -22,12 +22,16 @@
     <div class="rounded-box bg-base-200/60 p-4">
       <p class="text-sm font-medium">Account</p>
       <p class="mt-1 text-xs text-base-content/60">{{ user.email }}</p>
-      <div class="mt-4 flex items-center gap-2">
-        <a href="{% url 'account_logout' %}" class="btn btn-ghost btn-sm btn-block justify-start px-0 text-base-content/70 hover:text-error">
+
+
+      <form method="post" action="{% url 'account_logout' %}" class="mt-4 flex items-center gap-2">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-ghost btn-sm btn-block justify-start px-0 text-base-content/70 hover:text-error">
           <i class="fa-solid fa-right-from-bracket w-4 text-error/70"></i>
           Log out
-        </a>
-      </div>
+        </button>
+      </form>
+
     </div>
   </div>
 </aside>

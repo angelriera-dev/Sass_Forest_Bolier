@@ -1,32 +1,22 @@
-{% extends "base.html" %}
+{% extends "components/ui/auth_shell.html" %}
 
 {% block title %}Confirm Login Code | SaaS Boilerplate{% endblock %}
 
-{% block content %}
-<div class="flex min-h-[calc(100vh-5rem)] items-center justify-center px-4 py-10">
-  <div class="w-full max-w-md">
-    <div class="card border border-base-200 bg-base-100 shadow-sm">
-      <div class="card-body p-6 sm:p-8">
-        <div class="text-center">
-          <h2 class="text-3xl font-semibold tracking-tight">Enter login code</h2>
-          <p class="mt-2 text-sm text-base-content/60">We've sent a login code to your email. Please enter it below.</p>
-        </div>
+{% block auth_heading %}Enter login code{% endblock %}
+{% block auth_subtitle %}We've sent a login code to your email. Please enter it below.{% endblock %}
 
-        <form class="space-y-5" method="POST">
-          {% csrf_token %}
+{% block auth_content %}
+<form class="space-y-5" method="POST">
+  {% csrf_token %}
 
-          {% include "components/ui/input.html" with id="id_code" name="code" type="text" label="Login code" placeholder="Enter code" required=True %}
+  {% include "components/ui/input.html" with id="id_code" name="code" type="text" label="Login code" placeholder="Enter code" required=True %}
 
-          {% include "components/error_block.html" %}
+  {% include "components/error_block.html" %}
 
-          {% include "components/ui/button.html" with text="Confirm" icon="fa-solid fa-right-to-bracket" type="submit" class="w-full" %}
+  {% include "components/ui/button.html" with text="Confirm" icon="fa-solid fa-right-to-bracket" type="submit" class="w-full" %}
 
-          <div class="text-center text-sm">
-            <a href="{% url 'account_login' %}" class="link link-primary">Back to sign in</a>
-          </div>
-        </form>
-      </div>
-    </div>
+  <div class="text-center text-sm">
+    <a href="{% url 'account_login' %}" class="link link-primary">Back to sign in</a>
   </div>
-</div>
+</form>
 {% endblock %}

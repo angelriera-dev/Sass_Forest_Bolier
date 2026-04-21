@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="flex min-h-[calc(100vh-5rem)] items-center justify-center px-4 py-10">
+  <div class="w-full max-w-md">
+    <div class="card border border-base-200 bg-base-100 shadow-sm">
+      <div class="card-body p-6 sm:p-8 space-y-6">
+        <div class="text-center">
+          <h2 class="text-3xl font-semibold tracking-tight">{% block status_heading %}{% endblock %}</h2>
+          <p class="mt-2 text-sm text-base-content/60">{% block status_subtitle %}{% endblock %}</p>
+        </div>
+
+        {% block status_alert %}{% endblock %}
+
+        <div class="space-y-4">
+          {% block status_body %}{% endblock %}
+        </div>
+
+        {% block status_actions %}{% endblock %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

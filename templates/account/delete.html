@@ -1,40 +1,30 @@
-{% extends "base.html" %}
+{% extends "components/ui/auth_shell.html" %}
 
 {% block title %}Delete Account | SaaS Boilerplate{% endblock %}
 
-{% block content %}
-<div class="flex min-h-[calc(100vh-5rem)] items-center justify-center px-4 py-10">
-  <div class="w-full max-w-md">
-    <div class="card border border-base-200 bg-base-100 shadow-sm">
-      <div class="card-body p-6 sm:p-8">
-        <div class="text-center">
-          <h2 class="text-3xl font-semibold tracking-tight">Delete account</h2>
-          <p class="mt-2 text-sm text-base-content/60">This action cannot be undone. Please be certain.</p>
-        </div>
+{% block auth_heading %}Delete account{% endblock %}
+{% block auth_subtitle %}This action cannot be undone. Please be certain.{% endblock %}
 
-        <div class="alert alert-warning items-start">
-          <i class="fa-solid fa-triangle-exclamation mt-0.5"></i>
-          <div>
-            <h3 class="text-sm font-medium">Warning</h3>
-            <p class="mt-1 text-sm leading-6">Deleting your account will permanently remove all your data and cannot be undone.</p>
-          </div>
-        </div>
-
-        <form class="space-y-5" method="POST" action="{% url 'account_delete' %}">
-      {% csrf_token %}
-
-          {% include "components/ui/input.html" with id="id_password" name="password" type="password" label="Current password" placeholder="Enter your password to confirm" required=True no_margin=True %}
-
-          {% include "components/error_block.html" %}
-
-          {% include "components/ui/button.html" with text="Delete account" icon="fa-solid fa-trash-alt" type="submit" variant="error" class="w-full" %}
-
-          <div class="text-center text-sm">
-            <a href="{% url 'dashboard:profile' %}" class="link link-primary">Cancel and return to profile</a>
-          </div>
-        </form>
-      </div>
-    </div>
+{% block auth_content %}
+<div class="alert alert-warning items-start">
+  <i class="fa-solid fa-triangle-exclamation mt-0.5"></i>
+  <div>
+    <h3 class="text-sm font-medium">Warning</h3>
+    <p class="mt-1 text-sm leading-6">Deleting your account will permanently remove all your data and cannot be undone.</p>
   </div>
 </div>
+
+<form class="space-y-5" method="POST" action="{% url 'account_delete' %}">
+  {% csrf_token %}
+
+  {% include "components/ui/input.html" with id="id_password" name="password" type="password" label="Current password" placeholder="Enter your password to confirm" required=True no_margin=True %}
+
+  {% include "components/error_block.html" %}
+
+  {% include "components/ui/button.html" with text="Delete account" icon="fa-solid fa-trash-alt" type="submit" variant="error" class="w-full" %}
+
+  <div class="text-center text-sm">
+    <a href="{% url 'dashboard:profile' %}" class="link link-primary">Cancel and return to profile</a>
+  </div>
+</form>
 {% endblock %}

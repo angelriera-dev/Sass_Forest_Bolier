@@ -1,41 +1,36 @@
-{% extends "base.html" %}
+{% extends "components/ui/status_page.html" %}
 
 {% block title %}Account Inactive | SaaS Boilerplate{% endblock %}
 
-{% block content %}
 {% url 'account_login' as login_url %}
-<div class="flex min-h-[calc(100vh-5rem)] items-center justify-center px-4 py-10">
-  <div class="w-full max-w-md">
-    <div class="card border border-base-200 bg-base-100 shadow-sm">
-      <div class="card-body p-6 sm:p-8 space-y-6">
-        <div class="text-center">
-          <h2 class="text-3xl font-semibold tracking-tight">Account inactive</h2>
-          <p class="mt-2 text-sm text-base-content/60">This account is currently inactive.</p>
-        </div>
+{% block status_heading %}Account inactive{% endblock %}
+{% block status_subtitle %}This account is currently inactive.{% endblock %}
 
-        <div class="alert alert-warning items-start">
-          <i class="fa-solid fa-triangle-exclamation mt-0.5"></i>
-          <div>
-            <h3 class="text-sm font-medium">Account status</h3>
-            <div class="mt-1 text-sm leading-6">
-              <p>Your account has been marked as inactive. This could be due to:</p>
-              <ul class="mt-2 list-disc pl-5 space-y-1">
-                <li>Email verification pending</li>
-                <li>Account suspension</li>
-                <li>Administrative action</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <div class="text-center text-sm text-base-content/60">
-          <p>Please contact support if you believe this is an error.</p>
-          <div class="mt-4">
-            {% include "components/ui/button.html" with text="Return to sign in" href=login_url variant="primary" size="sm" %}
-          </div>
-        </div>
-      </div>
+{% block status_alert %}
+<div class="alert alert-warning items-start">
+  <i class="fa-solid fa-triangle-exclamation mt-0.5"></i>
+  <div>
+    <h3 class="text-sm font-medium">Account status</h3>
+    <div class="mt-1 text-sm leading-6">
+      <p>Your account has been marked as inactive. This could be due to:</p>
+      <ul class="mt-2 list-disc pl-5 space-y-1">
+        <li>Email verification pending</li>
+        <li>Account suspension</li>
+        <li>Administrative action</li>
+      </ul>
     </div>
   </div>
+</div>
+{% endblock %}
+
+{% block status_body %}
+<div class="text-center text-sm text-base-content/60">
+  <p>Please contact support if you believe this is an error.</p>
+</div>
+{% endblock %}
+
+{% block status_actions %}
+<div class="text-center">
+  {% include "components/ui/button.html" with text="Return to sign in" href=login_url variant="primary" size="sm" %}
 </div>
 {% endblock %}

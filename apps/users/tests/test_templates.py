@@ -17,6 +17,8 @@ class TestTemplateComponents:
     """Test that all template components exist and load correctly."""
 
     COMPONENTS = [
+        'components/ui/auth_shell.html',
+        'components/ui/status_page.html',
         'components/ui/input.html',
         'components/ui/button.html',
         'components/ui/link.html',
@@ -78,14 +80,35 @@ class TestAuthTemplates:
         'account/login.html',
         'account/signup.html',
         'account/password_reset.html',
+        'account/password_change.html',
+        'account/password_reset_from_key.html',
+        'account/logout.html',
+        'account/delete.html',
+        'account/reauthenticate.html',
+        'account/confirm_login_code.html',
     ]
 
     @pytest.mark.parametrize('template_path', AUTH_TEMPLATES)
     def test_auth_template_extends_base(self, template_path):
-        """Auth templates should extend base.html."""
+        """Auth templates should extend the auth shell."""
         template = get_template(template_path)
         source = template.template.source
-        assert 'extends "base.html"' in source
+        assert 'extends "components/ui/auth_shell.html"' in source
+
+    def test_status_templates_extend_status_shell(self):
+        """Static status pages should use the shared status shell."""
+        for template_path in [
+            'account/password_reset_done.html',
+            'account/password_change_done.html',
+            'account/password_reset_from_key_done.html',
+            'account/email_change_done.html',
+            'account/verification_sent.html',
+            'account/email_confirm.html',
+            'account/inactive.html',
+        ]:
+            template = get_template(template_path)
+            source = template.template.source
+            assert 'extends "components/ui/status_page.html"' in source
 
     def test_login_uses_components(self):
         """Login should use input component."""
