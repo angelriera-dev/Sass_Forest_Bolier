@@ -4,7 +4,7 @@
 
 ### Added
 - Shared account shells: `templates/components/ui/auth_shell.html` and `templates/components/ui/status_page.html`
-- Consolidated frontend documentation in `docs/frontend.md`
+- Consolidated frontend documentation in `frontend.md`
 
 ### Changed
 - Migrated account auth and status templates to shared shells
