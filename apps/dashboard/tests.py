@@ -23,13 +23,15 @@ class DashboardAccessTests(TestCase):
         self.assertEqual(response.status_code, 302)
 
     def test_dashboard_accessible_when_logged_in(self):
-        user = User.objects.create_user(email='test@example.com', password='testpass123')
+        password = 'testpass123'  # noqa: S105
+        user = User.objects.create_user(email='test@example.com', password=password)
         self.client.force_login(user)
         response = self.client.get('/dashboard/')
         self.assertEqual(response.status_code, 200)
 
     def test_dashboard_home_renders_navigation_shell(self):
-        user = User.objects.create_user(email='test@example.com', password='testpass123')
+        password = 'testpass123'  # noqa: S105
+        user = User.objects.create_user(email='test@example.com', password=password)
         self.client.force_login(user)
         response = self.client.get('/dashboard/')
         self.assertContains(response, 'data-theme')
@@ -37,7 +39,8 @@ class DashboardAccessTests(TestCase):
         self.assertContains(response, 'Toggle theme')
 
     def test_settings_page_renders_new_ui_sections(self):
-        user = User.objects.create_user(email='test@example.com', password='testpass123')
+        password = 'testpass123'  # noqa: S105
+        user = User.objects.create_user(email='test@example.com', password=password)
         self.client.force_login(user)
         response = self.client.get('/dashboard/settings/')
         self.assertContains(response, 'Email notifications')
@@ -53,7 +56,8 @@ class AuthUiSmokeTests(TestCase):
         self.assertContains(response, 'card bg-base-100')
 
     def test_logout_page_uses_modern_confirmation(self):
-        user = User.objects.create_user(email='test@example.com', password='testpass123')
+        password = 'testpass123'  # noqa: S105
+        user = User.objects.create_user(email='test@example.com', password=password)
         self.client.force_login(user)
         response = self.client.get(reverse('account_logout'))
         self.assertEqual(response.status_code, 200)
@@ -64,13 +68,19 @@ class AuthUiSmokeTests(TestCase):
 class SubscriptionPlanModelTests(TestCase):
     def test_create_plan(self):
         plan = SubscriptionPlan.objects.create(
-            name='Pro', slug='pro', description='Pro plan', price=9.99, interval='monthly', features=['API access'],
+            name='Pro',
+            slug='pro',
+            description='Pro plan',
+            price=9.99,
+            interval='monthly',
+            features=['API access'],
         )
         self.assertEqual(str(plan), 'Pro (Monthly)')
         self.assertTrue(plan.is_active)
 
     def test_user_settings_created_on_access(self):
-        user = User.objects.create_user(email='test@example.com', password='testpass123')
+        password = 'testpass123'  # noqa: S105
+        user = User.objects.create_user(email='test@example.com', password=password)
         settings, created = UserSettings.objects.get_or_create(user=user)
         self.assertTrue(created)
         self.assertEqual(settings.subscription_status, 'inactive')
@@ -78,7 +88,11 @@ class SubscriptionPlanModelTests(TestCase):
 
 class ApiKeyHashingTests(TestCase):
     def setUp(self):
-        self.user = User.objects.create_user(email='test@example.com', password='testpass123')
+        password = 'testpass123'  # noqa: S105
+        self.user = User.objects.create_user(
+            email='test@example.com',
+            password=password,
+        )
         self.client.force_login(self.user)
 
     def test_generate_api_key_stores_only_hash(self):
@@ -88,7 +102,8 @@ class ApiKeyHashingTests(TestCase):
 
         self.assertEqual(len(settings.api_key_hash), 64)
         self.assertNotEqual(settings.api_key_hash, plaintext)
-        self.assertEqual(settings.api_key_hash, hashlib.sha256(plaintext.encode()).hexdigest())
+        expected_hash = hashlib.sha256(plaintext.encode()).hexdigest()
+        self.assertEqual(settings.api_key_hash, expected_hash)
 
     def test_api_key_prefix_stored_for_display(self):
         self.client.post(reverse('dashboard:generate_api_key'))

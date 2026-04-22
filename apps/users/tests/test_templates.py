@@ -9,19 +9,18 @@ Validates that:
 
 import pytest
 from django.template import TemplateDoesNotExist
-from django.template.loader import get_template, select_template
-from django.test import RequestFactory, override_settings
+from django.template.loader import get_template
 
 
 class TestTemplateComponents:
     """Test that all template components exist and load correctly."""
 
-    COMPONENTS = [
+    COMPONENTS = (
         'components/ui/input.html',
         'components/ui/button.html',
         'components/ui/link.html',
         'components/error_block.html',
-    ]
+    )
 
     @pytest.mark.parametrize('template_path', COMPONENTS)
     def test_component_exists(self, template_path):
@@ -61,7 +60,6 @@ class TestTemplateComponents:
         """Link component should render with url and text."""
         template = get_template('components/ui/link.html')
         # URL tag needs proper context
-        from django.urls import reverse
         rendered = template.render({
             'url': 'account_login',
             'text': 'Sign in',
@@ -74,11 +72,11 @@ class TestTemplateComponents:
 class TestAuthTemplates:
     """Test that auth templates load correctly."""
 
-    AUTH_TEMPLATES = [
+    AUTH_TEMPLATES = (
         'account/login.html',
         'account/signup.html',
         'account/password_reset.html',
-    ]
+    )
 
     @pytest.mark.parametrize('template_path', AUTH_TEMPLATES)
     def test_auth_template_extends_base(self, template_path):

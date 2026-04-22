@@ -1,6 +1,5 @@
-from django.urls import path, include
-
+app_name = 'users'
 
 urlpatterns = [
-    path('', include(router.urls)),
+    # Add user-specific URLs here
 ]

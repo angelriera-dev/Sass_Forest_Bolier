@@ -18,7 +18,11 @@ class Command(BaseCommand):
         if created:
             user.set_password('admin123')
             user.save()
-            self.stdout.write(self.style.SUCCESS('Admin user created (admin@example.com / admin123)'))
+            self.stdout.write(
+                self.style.SUCCESS(
+                    'Admin user created (admin@example.com / admin123)'
+                )
+            )
         else:
             self.stdout.write('Admin user already exists')
 
@@ -38,7 +42,13 @@ class Command(BaseCommand):
                 'description': 'For growing teams and businesses',
                 'price': 9.99,
                 'interval': 'monthly',
-                'features': ['Everything in Free', 'Priority support', 'API access', '10 projects', 'Analytics'],
+                'features': [
+                    'Everything in Free',
+                    'Priority support',
+                    'API access',
+                    '10 projects',
+                    'Analytics',
+                ],
             },
             {
                 'name': 'Enterprise',
