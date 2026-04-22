@@ -154,6 +154,8 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+.pytest_cache
+.ruff_cache
 
 # pytype static type analyzer
 .pytype/
@@ -173,5 +175,7 @@ cython_debug/
 
 
 .codex
+
+.coverage
 
 templates/admin/

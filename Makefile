@@ -1,9 +1,13 @@
 
 
+install: init
+
 init:
 	python3 -m venv .venv
-	pip install --upgrade pip
-	.venv/bin/pip install -r requirements.txt
+	.venv/bin/pip install --upgrade pip
+	.venv/bin/pip install -r requirements/local.txt
+
+run: dev
 
 dev:
 	.venv/bin/python manage.py runserver
@@ -12,7 +16,24 @@ migrate:
 	.venv/bin/python manage.py migrate
 
 
+## TEST QUALITY
 
+check:
+	.venv/bin/python manage.py check
+
+test:
+	.venv/bin/pytest --cov=apps --cov-report=term-missing
+
+lint:
+	.venv/bin/ruff check .
+
+check_types:
+	.venv/bin/pyright .
+
+check_code: lint check_types test check
+
+
+# Docker
 
 APP_NAME := app
 
@@ -31,8 +52,7 @@ dev_container:
 clear_container:
 	@docker compose down &&
 
-
-rm rm-all:
+rm-containers:
 	@ids="$(shell docker ps -aq)"; \
 	if [ -n "$$ids" ]; then docker stop $$ids && docker rm $$ids; else echo "no containers"; fi
 
