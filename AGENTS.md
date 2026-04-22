@@ -135,6 +135,24 @@ If a file is necessary, include only unique, concise content that is not stored 
 - File names: use clear, minimal names indicating unique purpose (e.g., "migration-script.sh" — not "decision-notes.txt").
 - Verification: Require one explicit check step: "Checked chat for existing decisions: YES/NO" recorded in the file metadata.
 
+## Pre-Commit & Verification Workflow
+
+To ensure code integrity and functional stability, every change MUST follow this verification sequence before finalization and commit:
+
+1.  **Technical Validation**:
+    - Run `make check_code` to execute the full quality suite (lint, type-check, tests, Django checks).
+    - All checks MUST pass (clean exit). If there are existing errors, they must be addressed or explicitly documented as "pre-existing" in the PR.
+2.  **Functional Verification**:
+    - Start the development server with `make run`.
+    - Manually verify the affected feature/view in the browser.
+    - Confirm HTMX interactions and Alpine.js components behave as expected.
+3.  **User Acceptance**:
+    - Present the changes to the user with evidence (logs/screenshots if possible).
+    - Ask: "Please verify the changes in your browser. Is everything behaving correctly?"
+4.  **Commit**:
+    - Only commit once Technical, Functional, and User validations are successful.
+    - Use conventional commit messages.
+
 ## Build & Test Commands
 
 - `make install` — Install dependencies
