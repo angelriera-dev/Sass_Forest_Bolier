@@ -1,0 +1,26 @@
+[tool.ruff]
+# Target Python version
+target-version = "py312"
+line-length = 88
+
+# Rules: Style (E, W), Imports (I), Security (S), Bugbear (B), Upgrade (UP), Django (DJ)
+select = ["E", "F", "W", "I", "S", "B", "UP", "DJ", "N", "RUF"]
+ignore = [
+    "S101", # Allow assert (needed for pytest)
+    "DJ001", # Allow nullable string fields in models if preferred
+]
+
+[tool.ruff.lint.isort]
+known-first-party = ["apps", "config"]
+
+[tool.ruff.lint.flake8-quotes]
+docstring-quotes = "double"
+inline-quotes = "single"
+
+[tool.pyright]
+include = ["apps", "config"]
+exclude = ["**/migrations", "**/tests"]
+typeCheckingMode = "strict"
+reportMissingTypeStubs = false
+pythonVersion = "3.12"
+pythonPlatform = "Linux"
