@@ -3,18 +3,17 @@ Django base settings, modularized for security and scalability.
 """
 
 from pathlib import Path
-import os
-
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 # --- CORE SETTINGS ---
-from .core.security import *
 from .core.database import *
+from .core.security import *
 from .core.storage import *
 
 # --- THIRD PARTY SETTINGS ---
 from .third_party.allauth import *
+
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 # --- APPLICATION DEFINITION ---
 
