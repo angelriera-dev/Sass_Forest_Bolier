@@ -16,13 +16,16 @@ migrate:
 	.venv/bin/python manage.py migrate
 
 
-## TEST QUALITY
+# TEST QUALITY
 
 check:
 	.venv/bin/python manage.py check
 
-test:
+pytest:
 	.venv/bin/pytest --cov=apps --cov-report=term-missing
+
+test:
+	.venv/bin/python manage.py test
 
 lint:
 	.venv/bin/ruff check .
@@ -30,7 +33,7 @@ lint:
 check_types:
 	.venv/bin/pyright .
 
-check_code: lint check_types test check
+check_code: check lint check_types pytest test
 
 
 # Docker

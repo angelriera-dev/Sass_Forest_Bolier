@@ -9,6 +9,12 @@ ignore = [
     "S101", # Allow assert (needed for pytest)
     "DJ001", # Allow nullable string fields in models if preferred
 ]
+exclude = [
+    "**/migrations/*",
+]
+
+[tool.ruff.lint.per-file-ignores]
+"config/settings/*.py" = ["F403", "F405"]
 
 [tool.ruff.lint.isort]
 known-first-party = ["apps", "config"]

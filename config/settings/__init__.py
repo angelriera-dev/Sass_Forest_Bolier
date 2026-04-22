@@ -7,7 +7,6 @@ Default: dev
 """
 
 import os
-from pathlib import Path
 
 # Environment detection
 ENV = os.environ.get('DJANGO_ENV', 'dev').lower()
