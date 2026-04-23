@@ -7,15 +7,15 @@ class UserManager(BaseUserManager):
 
     use_in_migrations = True
 
-    def create_user(self, email, password=None, **extra_fields):
+    def create_user(self, email: str, password=None, **extra_fields):
         """Create and save a regular user."""
         if not email:
             raise ValueError("The Email address must be set.")
 
-        email: str = self.normalize_email(email)
+        normalized_email: str = self.normalize_email(email)
         username = extra_fields.pop("username", "")
 
-        user = self.model(email=email, username=username, **extra_fields)
+        user = self.model(email=normalized_email, username=username, **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
         return user
@@ -66,7 +66,7 @@ class User(AbstractUser):
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ()
 
-    class Meta:
+    class Meta: # type: ignore
         db_table = "users_user"
         verbose_name = "User"
         verbose_name_plural = "Users"

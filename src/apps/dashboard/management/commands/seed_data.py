@@ -19,7 +19,7 @@ class Command(BaseCommand):
             user.set_password('admin123')
             user.save()
             self.stdout.write(
-                self.style.SUCCESS(
+                self.style.SUCCESS( # type: ignore
                     'Admin user created (admin@example.com / admin123)'
                 )
             )
@@ -72,6 +72,6 @@ class Command(BaseCommand):
                 defaults=plan_data,
             )
             status = 'created' if created else 'already exists'
-            self.stdout.write(self.style.SUCCESS(f'Plan "{plan.name}" {status}'))
+            self.stdout.write(self.style.SUCCESS(f'Plan "{plan.name}" {status}')) # type: ignore
 
-        self.stdout.write(self.style.SUCCESS('\nSeed data complete!'))
+        self.stdout.write(self.style.SUCCESS('\nSeed data complete!')) # type: ignore

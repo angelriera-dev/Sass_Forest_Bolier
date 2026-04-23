@@ -1,55 +1,65 @@
 
+VENV := .venv
+PYTHON := $(VENV)/bin/python
+PIP := $(VENV)/bin/pip
+PYTEST := $(VENV)/bin/pytest
+RUFF := $(VENV)/bin/ruff
+PYRIGHT := $(VENV)/bin/pyright
+BANDIT := $(VENV)/bin/bandit
+SEMGREP := $(VENV)/bin/semgrep
+
+# Enfoque: Todos los comandos se ejecutan desde la raíz, apuntando a src/
+SRC_DIR := src
 
 install: init
 
 init:
-	python3 -m venv .venv
-	.venv/bin/pip install --upgrade pip
-	.venv/bin/pip install -r requirements/local.txt
+	python3 -m venv $(VENV)
+	$(PIP) install --upgrade pip
+	$(PIP) install -r $(SRC_DIR)/requirements/local.txt
 
 run: dev
 
 dev:
-	.venv/bin/python manage.py runserver
+	$(PYTHON) $(SRC_DIR)/manage.py runserver
 
 migrate:
-	.venv/bin/python manage.py migrate
-
+	$(PYTHON) $(SRC_DIR)/manage.py migrate
 
 # TEST QUALITY
 
 check:
-	.venv/bin/python manage.py check
+	$(PYTHON) $(SRC_DIR)/manage.py check
 
 pytest:
-	.venv/bin/pytest --cov=apps --cov-report=term-missing
+	$(PYTEST) --cov=$(SRC_DIR)/apps --cov-report=term-missing
 
-test:
-	.venv/bin/python manage.py test
+django-test:
+	$(PYTHON) $(SRC_DIR)/manage.py test
 
 lint:
-	.venv/bin/ruff check .
+	$(RUFF) check $(SRC_DIR)
 
 check_types:
-	.venv/bin/pyright .
+	$(PYRIGHT) $(SRC_DIR)
 
 security_scan:
 	@echo "Running Bandit (Security Linter)..."
-	.venv/bin/bandit -r apps/ config/
+	$(BANDIT) -r $(SRC_DIR)/apps/ $(SRC_DIR)/config/
 	@echo "Running Semgrep (OWASP Scans)..."
-	.venv/bin/semgrep scan --config auto
+	$(SEMGREP) scan --config auto $(SRC_DIR)
 
 clean:
 	find . -type d -name "__pycache__" -exec rm -rf {} +
-	rm -rf .pytest_cache .ruff_cache .temp_venv .coverage
+	rm -rf **/.pytest_cache **/.ruff_cache **/.temp_venv **/.coverage
 
 check_code: check lint check_types security_scan pytest
 
-
-# Docker
-
+# Docker (Ajustado para buscar el Dockerfile en la raíz o donde esté)
 APP_NAME := app
 
+
+## No refactorizar!
 dev_container:
 	@bash -lc '\
 	if docker ps --filter "name=app-app" --format "{{.Names}}" | grep -q "app-app"; then \
@@ -63,7 +73,7 @@ dev_container:
 
 
 clear_container:
-	@docker compose down &&
+	@docker compose down
 
 rm-containers:
 	@ids="$(shell docker ps -aq)"; \

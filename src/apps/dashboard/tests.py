@@ -12,22 +12,22 @@ User = get_user_model()
 class DashboardAccessTests(TestCase):
     def test_dashboard_redirects_anonymous(self):
         response = self.client.get('/dashboard/')
-        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.status_code, 302) # type: ignore
 
     def test_profile_redirects_anonymous(self):
         response = self.client.get('/dashboard/profile/')
-        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.status_code, 302) # type: ignore
 
     def test_settings_redirects_anonymous(self):
         response = self.client.get('/dashboard/settings/')
-        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.status_code, 302) # type: ignore
 
     def test_dashboard_accessible_when_logged_in(self):
         password = 'testpass123'  # noqa: S105
         user = User.objects.create_user(email='test@example.com', password=password)
         self.client.force_login(user)
         response = self.client.get('/dashboard/')
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 200) # type: ignore
 
     def test_dashboard_home_renders_navigation_shell(self):
         password = 'testpass123'  # noqa: S105
@@ -51,7 +51,7 @@ class DashboardAccessTests(TestCase):
 class AuthUiSmokeTests(TestCase):
     def test_login_page_uses_modern_shell(self):
         response = self.client.get(reverse('account_login'))
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 200) # type: ignore
         self.assertContains(response, 'Sign in')
         self.assertContains(response, 'card bg-base-100')
 
@@ -60,7 +60,7 @@ class AuthUiSmokeTests(TestCase):
         user = User.objects.create_user(email='test@example.com', password=password)
         self.client.force_login(user)
         response = self.client.get(reverse('account_logout'))
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 200) # type: ignore
         self.assertContains(response, 'Sign out')
         self.assertContains(response, 'end this session')
 

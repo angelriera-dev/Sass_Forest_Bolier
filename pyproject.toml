@@ -1,20 +1,23 @@
 [tool.ruff]
-# Target Python version
 target-version = "py312"
 line-length = 88
+exclude = [
+    "**/migrations/*",
+]
 
+[tool.ruff.lint]
 # Rules: Style (E, W), Imports (I), Security (S), Bugbear (B), Upgrade (UP), Django (DJ)
 select = ["E", "F", "W", "I", "S", "B", "UP", "DJ", "N", "RUF"]
 ignore = [
     "S101", # Allow assert (needed for pytest)
     "DJ001", # Allow nullable string fields in models if preferred
-]
-exclude = [
-    "**/migrations/*",
+    "F403", # Allow star imports in settings
+    "F405", # Allow names from star imports
+    "E402", # Allow module level imports not at top (for modular settings)
 ]
 
 [tool.ruff.lint.per-file-ignores]
-"config/settings/*.py" = ["F403", "F405"]
+"src/config/settings/*.py" = ["F403", "F405"]
 
 [tool.ruff.lint.isort]
 known-first-party = ["apps", "config"]
@@ -24,7 +27,7 @@ docstring-quotes = "double"
 inline-quotes = "single"
 
 [tool.pyright]
-include = ["apps", "config"]
+include = ["src"]
 exclude = ["**/migrations", "**/tests"]
 typeCheckingMode = "strict"
 reportMissingTypeStubs = false

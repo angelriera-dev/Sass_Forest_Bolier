@@ -17,16 +17,20 @@ class SubscriptionPlan(models.Model):
         default='monthly'
     )
     features = models.JSONField(default=list)
-    is_active = models.BooleanField(default=True)
+    is_active = models.BooleanField(default=True) # type: ignore
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    objects = models.Manager()
 
     class Meta:
         verbose_name = 'Subscription Plan'
         verbose_name_plural = 'Subscription Plans'
 
     def __str__(self):
-        return f"{self.name} ({self.get_interval_display()})"
+        # Cast para evitar error de tipado en acceso dinámico
+        interval = str(self.get_interval_display()) # type: ignore
+        return f"{self.name} ({interval})"
 
 class UserSettings(models.Model):
     user = models.OneToOneField(
@@ -35,9 +39,9 @@ class UserSettings(models.Model):
         related_name='settings'
     )
     # Notification preferences
-    notify_comments = models.BooleanField(default=False)
-    notify_updates = models.BooleanField(default=False)
-    notify_marketing = models.BooleanField(default=False)
+    notify_comments = models.BooleanField(default=False) # type: ignore
+    notify_updates = models.BooleanField(default=False) # type: ignore
+    notify_marketing = models.BooleanField(default=False) # type: ignore
 
     # API settings
     api_key_hash = models.CharField(max_length=64, blank=True, default='')
@@ -69,12 +73,15 @@ class UserSettings(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    objects = models.Manager()
+
     class Meta:
         verbose_name = 'User Settings'
         verbose_name_plural = 'User Settings'
 
     def __str__(self):
-        return f"Settings for {self.user.email}"
+        user_email = getattr(self.user, 'email', 'Unknown')
+        return f"Settings for {user_email}"
 
     @property
     def is_subscription_active(self):
