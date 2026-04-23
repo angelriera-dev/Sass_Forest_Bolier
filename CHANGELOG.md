@@ -57,6 +57,40 @@ Format: `YYYY-MM-DD — Summary — Files Affected`
 
 ---
 
-## Future Changes
+## 2026-04-22 — Cleanup redundant files and document project tooling
 
-_None logged yet. New entries will be added as changes occur._
+**Summary**: Initiated the `clean-architecture-frontend-automation` change by sanitizing the project environment and establishing a comprehensive AppSec Knowledge Base. Created dedicated documentation for Ruff, Pyright, SAST (Bandit/Semgrep), and automation workflows to serve as an educational wiki. Removed obsolete CDN template and updated git ignore rules.
+
+**Files Affected**:
+- `docs/appsec/` — New dedicated folder for security tooling documentation
+- `docs/appsec/index.md`, `ruff.md`, `pyright.md`, `sast.md`, `automation.md` — Detailed didactic guides
+- `docs/TOOLING.md` — Centralized entry point for quality standards
+- `.gitignore` — Added patterns for Python cache, pytest cache, and environment files
+- `config/templates/cdns.html` — Deleted redundant file; consolidated in `templates/cdns.html`
+- `CHANGELOG.md` — Updated with latest changes
+
+---
+
+## 2026-04-22 — Integrate pre-commit hooks and static security scanners
+
+**Summary**: Hardened the CI/CD pipeline and local development workflow by integrating automated security and quality tools. Added Bandit and Semgrep for SAST scanning, and configured pre-commit hooks to enforce coding standards before every commit. Updated Makefile with dedicated security and cleanup targets.
+
+**Files Affected**:
+- `.pre-commit-config.yaml` — New configuration for automated git hooks
+- `requirements/local.txt` — Added `bandit`, `semgrep`, and `pre-commit`
+- `Makefile` — Added `security_scan`, `clean` targets and updated `check_code`
+- `CHANGELOG.md` — Updated with latest automation changes
+
+---
+
+## 2026-04-22 — Enhance UI components with Alpine.js reactivity
+
+**Summary**: Refactored core frontend components to improve versatility and user experience. The button component now supports automated loading states via Alpine.js, preventing double submissions and providing immediate visual feedback. Improved class inheritance and accessibility across UI atoms.
+
+**Files Affected**:
+- `templates/components/ui/button.html` — Refactored with Alpine.js `x-data` and DaisyUI spinners
+- `CHANGELOG.md` — Updated with component evolution details
+
+---
+
+## Future Changes

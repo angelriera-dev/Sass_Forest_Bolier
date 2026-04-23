@@ -1,20 +1,23 @@
 {% comment %}
-Button atomo - minimal DaisyUI button
+Button Atomo - Standard Version
 Usage: 
-  {% include "components/ui/button.html" with text="Click" %}
-  {% include "components/ui/button.html" with text="Go" variant="secondary" size="sm" href="/url" %}
+  {% include "components/ui/button.html" with text="Save" type="submit" variant="primary" %}
 Variables:
-  text, href, variant (primary|secondary|accent|ghost|link), size (sm|lg), type (submit|button), no_margin, class
+  text, href, variant, size, type, icon, icon_position, class, disabled
 {% endcomment %}
 
-  {% if href %}
-  <a href="{{ href }}"
-  {% else %} 
-  <button type="{{ type|default:'button' }}"
-  {% endif %}
-  
-  class="btn inline-flex items-center justify-center gap-2 leading-none{% if variant %} btn-{{ variant|default:'ghost' }}{% else %} {% endif %}{% if size %} btn-{{ size }}{% endif %}{% if no_margin %} ms-0{% endif %}{% if class %} {{ class }}{% endif %}"
-  {% if disabled %}disabled{% endif %}
->
-  {% if icon %}<i class="{{ icon }}{% if icon_position != 'right' %} me-2{% else %} ms-2{% endif %}"></i>{% endif %}<span class="leading-none">{{ text }}</span>
-{% if href %}</a>{% else %}</button>{% endif %}
+{% if href %}
+<a href="{{ href }}"
+   class="btn inline-flex items-center justify-center gap-2 {{ class|default:'' }} {% if variant %}btn-{{ variant }}{% endif %} {% if size %}btn-{{ size }}{% endif %}"
+   {% if disabled %}aria-disabled="true" style="pointer-events: none; opacity: 0.5;"{% endif %}>
+    {% if icon %}<i class="{{ icon }} {% if icon_position != 'right' %}me-1{% else %}ms-1{% endif %}"></i>{% endif %}
+    <span class="leading-none">{{ text }}</span>
+</a>
+{% else %}
+<button type="{{ type|default:'button' }}"
+        {% if disabled %}disabled{% endif %}
+        class="btn inline-flex items-center justify-center gap-2 {{ class|default:'' }} {% if variant %}btn-{{ variant }}{% endif %} {% if size %}btn-{{ size }}{% endif %}">
+    {% if icon %}<i class="{{ icon }} {% if icon_position != 'right' %}me-1{% else %}ms-1{% endif %}"></i>{% endif %}
+    <span class="leading-none">{{ text }}</span>
+</button>
+{% endif %}

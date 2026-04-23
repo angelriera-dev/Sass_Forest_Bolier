@@ -24,8 +24,7 @@ check:
 pytest:
 	.venv/bin/pytest --cov=apps --cov-report=term-missing
 
-test:
-	.venv/bin/python manage.py test
+test: pytest
 
 lint:
 	.venv/bin/ruff check .
@@ -33,7 +32,17 @@ lint:
 check_types:
 	.venv/bin/pyright .
 
-check_code: check lint check_types pytest test
+security_scan:
+	@echo "Running Bandit (Security Linter)..."
+	.venv/bin/bandit -r apps/ config/
+	@echo "Running Semgrep (OWASP Scans)..."
+	.venv/bin/semgrep scan --config auto
+
+clean:
+	find . -type d -name "__pycache__" -exec rm -rf {} +
+	rm -rf .pytest_cache .ruff_cache .temp_venv .coverage
+
+check_code: check lint check_types security_scan pytest
 
 
 # Docker

@@ -131,11 +131,24 @@ celerybeat.pid
 # Environments
 .env
 .venv
+.temp_venv
 env/
 venv/
 ENV/
 env.bak/
 venv.bak/
+
+# Python cache
+**/__pycache__/
+*.py[cod]
+*$py.class
+
+# Test cache
+.pytest_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
 
 # Spyder project settings
 .spyderproject
@@ -179,3 +192,5 @@ cython_debug/
 .coverage
 
 templates/admin/
+openspec/
+.atl/

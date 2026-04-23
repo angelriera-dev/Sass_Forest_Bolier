@@ -5,7 +5,7 @@ Sub-agents load individual SKILL.md files on-demand; they do NOT read this regis
 
 Follows progressive disclosure: skills are loaded on-demand, not pre-digested.
 
-**Version**: 2.3.0 | **Last Updated**: 2026-04-21 | **Spec**: https://agentskills.io/specification
+**Version**: 2.4.0 | **Last Updated**: 2026-04-22 | **Spec**: https://agentskills.io/specification
 
 ## Available Skills
 
@@ -16,6 +16,7 @@ Follows progressive disclosure: skills are loaded on-demand, not pre-digested.
 | Django templates, HTMX, Alpine.js, Tailwind | django-htmx | `SKILLS/django-htmx/SKILL.md` | 1.0 |
 | Django allauth setup, templates, configuration | django-allauth | `SKILLS/django-allauth/SKILL.md` | 1.0 |
 | HTMX swap, events, OOB updates, indicators | htmx-patterns | `SKILLS/htmx-patterns/SKILL.md` | 1.0 |
+| AppSec review, security audit, vulnerability scan | web-design-guidelines | `/home/rag/.agents/skills/web-design-guidelines/SKILL.md` | 1.0 |
 
 ### Local Architecture Skills
 
