@@ -59,11 +59,11 @@
 </head>
 <body class="min-h-screen bg-base-200">
     {% block navbar %}{% include "components/navbar.html" %}{% endblock %}
-    
+
     <main class="container mx-auto px-4 py-6">
         {% block content %}{% endblock %}
     </main>
-    
+
     {% block footer %}{% endblock %}
     {% block extra_js %}{% endblock %}
 </body>
