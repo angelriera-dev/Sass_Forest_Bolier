@@ -190,6 +190,7 @@ cython_debug/
 .codex
 
 .coverage
+.temp_venv
 
 templates/admin/
 openspec/

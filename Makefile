@@ -24,7 +24,8 @@ check:
 pytest:
 	.venv/bin/pytest --cov=apps --cov-report=term-missing
 
-test: pytest
+test:
+	.venv/bin/python manage.py test
 
 lint:
 	.venv/bin/ruff check .
