@@ -1,13 +1,13 @@
 import os
 
-env = os.environ.get('DJANGO_ENV', 'dev').lower()
+env = os.environ.get("DJANGO_ENV", "dev").lower()
 
 # django-allauth settings
 ACCOUNT_SIGNUP_FIELDS = ["email*", "password1*", "password2*"]
 ACCOUNT_LOGIN_METHODS = {"email"}
 
 # Verificación de email obligatoria en producción
-if env == 'prod':
+if env == "prod":
     _email_verification = "mandatory"
 else:
     _email_verification = "none"
