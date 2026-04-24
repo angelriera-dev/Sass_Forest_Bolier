@@ -1,7 +1,7 @@
 # =============================================================================
 # STAGE 1: Builder
 # =============================================================================
-FROM python:3.12-slim-bookworm AS builder
+FROM python:3.14-slim-bookworm AS builder
 
 # Install uv
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvbin/uv
@@ -29,7 +29,7 @@ RUN --mount=type=cache,target=/root/.cache/uv \
 # =============================================================================
 # STAGE 2: Runner
 # =============================================================================
-FROM python:3.12-slim-bookworm AS runner
+FROM python:3.14-slim-bookworm AS runner
 
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
