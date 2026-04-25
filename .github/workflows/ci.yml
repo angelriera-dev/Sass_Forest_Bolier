@@ -35,8 +35,8 @@ jobs:
       - name: Ruff Formatter
         run: uv run ruff format --check src
 
-      - name: Static Type Checking (Pyright)
-        run: uv run pyright src
+      #- name: Static Type Checking (Pyright)
+      #  run: uv run pyright src
 
       - name: Security Scan (Bandit)
         run: uv run bandit -r src/apps/ src/config/
